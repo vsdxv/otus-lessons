@@ -44,7 +44,7 @@ public class Homework1Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //        createTestData();
-     /*   logger.debug("Creating database tables");
+        logger.debug("Creating database tables");
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS "+dbSchema+"users (\n" +
                 "\tid int8 NOT NULL GENERATED ALWAYS AS IDENTITY,\n" +
                 "\tusername varchar(100) NOT NULL,\n" +
@@ -61,8 +61,8 @@ public class Homework1Application implements CommandLineRunner {
                 "\tuser_id int8 NOT NULL,\n" +
                 "\tfriend_id int8 NOT NULL,\n" +
                 "\tCONSTRAINT user_friends_pk PRIMARY KEY (user_id, friend_id)\n" +
-                ")");*/
-  /*      jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS education.users (\n" +
+                ")");
+        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS education.users (\n" +
                 "  id bigint unsigned NOT NULL AUTO_INCREMENT,\n" +
                 "  username varchar(100) NOT NULL,\n" +
                 "  password varchar(100) NOT NULL,\n" +
@@ -83,7 +83,6 @@ public class Homework1Application implements CommandLineRunner {
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" +
                 "");
 
-    */
     }
 
 }
