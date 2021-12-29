@@ -45,6 +45,9 @@ public class Homework1Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
 //        createTestData();
         logger.debug("Creating database tables");
+		
+		System.out.println("### dbSchema: " + dbSchema);
+		
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS "+dbSchema+"users (\n" +
                 "\tid int8 NOT NULL GENERATED ALWAYS AS IDENTITY,\n" +
                 "\tusername varchar(100) NOT NULL,\n" +

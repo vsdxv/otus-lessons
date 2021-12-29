@@ -97,5 +97,4 @@
               user_id=#{userId} and
               friend_id=#{friendId}
     </delete>
-    <!-- select * from education.users users where firstname like 'А%' and lastname like 'АБ%'; -->
 </mapper>
