@@ -62,7 +62,7 @@ public class Homework1Application implements CommandLineRunner {
                 "\tfriend_id int8 NOT NULL,\n" +
                 "\tCONSTRAINT user_friends_pk PRIMARY KEY (user_id, friend_id)\n" +
                 ")");
-        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS education.users (\n" +
+        /*jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS education.users (\n" +
                 "  id bigint unsigned NOT NULL AUTO_INCREMENT,\n" +
                 "  username varchar(100) NOT NULL,\n" +
                 "  password varchar(100) NOT NULL,\n" +
@@ -81,7 +81,7 @@ public class Homework1Application implements CommandLineRunner {
                 "   friend_id bigint NOT NULL,\n" +
                 "   PRIMARY KEY (friend_id,user_id)\n" +
                 ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci" +
-                "");
+                "");*/
 
     }
 
