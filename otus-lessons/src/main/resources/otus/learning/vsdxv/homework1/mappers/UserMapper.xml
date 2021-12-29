@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="otus.learning.vsdxv.homework1.mappers.UserMapper">
+    <resultMap id="mappingUser" type="otus.learning.vsdxv.homework1.model.User">
+        <result column="id" property="userId" />
+        <result column="username" property="username" />
+        <result column="firstname" property="firstName" />
+        <result column="lastname" property="lastName" />
+        <result column="age" property="age" />
+        <result column="gender" property="gender" />
+        <result column="interests" property="interests" />
+        <result column="city" property="city" />
+        <result column="password" property="password" />
+        <result column="enabled" property="enabled" />
+    </resultMap>
+    <select id="findUserByUserName" resultMap="mappingUser">
+        SELECT id,
+               username,
+               firstname,
+               lastname,
+               age,
+               gender,
+               interests,
+               city,
+               password,
+               enabled
+        FROM  ${db.schema}users where username = #{username}
+    </select>
+    <select id="findAllUsers" resultMap="mappingUser">
+        SELECT id,
+               username,
+               firstname,
+               lastname,
+               age,
+               gender,
+               interests,
+               city,
+               password,
+               enabled
+        FROM  ${db.schema}users
+    </select>
+    <insert id="saveUser" parameterType="otus.learning.vsdxv.homework1.model.User">
+        INSERT INTO ${db.schema}users
+        (
+            username,
+            firstname,
+            lastname,
+            age,
+            gender,
+            interests,
+            city,
+            password,
+            enabled
+        ) VALUES
+        (
+            #{username, jdbcType=CHAR},
+            #{firstName, jdbcType=CHAR},
+            #{lastName, jdbcType=CHAR},
+            #{age, jdbcType=INTEGER},
+            #{gender, jdbcType=INTEGER},
+            #{interests, jdbcType=CHAR},
+            #{city, jdbcType=CHAR},
+            #{password, jdbcType=CHAR},
+            #{enabled, jdbcType=SMALLINT}
+        )
+    </insert>
+    <insert id="addFriendById">
+        INSERT INTO ${db.schema}user_friends
+        (
+            user_id,
+            friend_id
+        ) VALUES
+        (
+            #{userId},
+            #{friendId}
+        )
+    </insert>
+    <select id="findUserFriends" resultMap="mappingUser">
+        select id,
+               username,
+               firstname,
+               lastname,
+               age,
+               gender,
+               interests,
+               city,
+               password,
+               enabled
+        from ${db.schema}users inner join
+             ${db.schema}user_friends
+             on ${db.schema}user_friends.friend_id=${db.schema}users.id
+        where ${db.schema}user_friends.user_id=#{userId}
+    </select>
+    <delete id="deleteFriendById">
+        DELETE FROM ${db.schema}user_friends
+        WHERE
+              user_id=#{userId} and
+              friend_id=#{friendId}
+    </delete>
+    <!-- select * from education.users users where firstname like 'А%' and lastname like 'АБ%'; -->
+</mapper>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Profiles</title>
+</head>
+
+<body>
+<div class="container">
+
+    <form th:action="@{/logout}" method="get">
+        <button name="registration" type="Submit">Выход</button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div>
+            <div>
+                <h2>Ваши данные</h2>
+                <span th:object="${currentUser}">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Возраст</th>
+                            <th>Пол</th>
+                            <th>Интересы</th>
+                            <th>Город</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="*{username}"></td>
+                            <td th:text="*{firstName}"></td>
+                            <td th:text="*{lastName}"></td>
+                            <td th:text="*{age}"></td>
+                            <td th:if="*{gender == 0}">Мужской</td>
+                            <td th:unless="*{gender == 0}">Женский</td>
+                            <td th:text="*{interests}"></td>
+                            <td th:text="*{city}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </span>
+            </div>
+            <h2>Ваши друзья</h2>
+            <div th:switch="${userFriends}">
+                <h2 th:case="${userFriends.isEmpty()}">У Вас нет друзей((((</h2>
+                <div th:case="*">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Возраст</th>
+                            <th>Пол</th>
+                            <th>Интересы</th>
+                            <th>Город</th>
+                            <th>Удалить из друзей</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${userFriends}">
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:if="${user.gender == 0}">Мужской</td>
+                            <td th:unless="${user.gender == 0}">Женский</td>
+                            <td th:text="${user.interests}"></td>
+                            <td th:text="${user.city}"></td>
+                            <td>
+                                <form th:action="@{/users/deleteFriend/{id}(id=${user.userId})}" method="post">
+                                    <button name="delete" type="Submit">Удалить</button>
+                                </form>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <h2>Остальные пользователи</h2>
+            <div th:switch="${users}">
+                <h2 th:case="null">Нет анкет</h2>
+                <div th:case="*">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Имя</th>
+                            <th>Фамилия</th>
+                            <th>Возраст</th>
+                            <th>Пол</th>
+                            <th>Интересы</th>
+                            <th>Город</th>
+                            <th>Добавить в друзья</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.firstName}"></td>
+                            <td th:text="${user.lastName}"></td>
+                            <td th:text="${user.age}"></td>
+                            <td th:if="${user.gender == 0}">Мужской</td>
+                            <td th:unless="${user.gender == 0}">Женский</td>
+                            <td th:text="${user.interests}"></td>
+                            <td th:text="${user.city}"></td>
+                            <td>
+                                <form th:action="@{/users/addFriend/{id}(id=${user.userId})}" method="post">
+                                    <button name="delete" type="Submit">Добавить</button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

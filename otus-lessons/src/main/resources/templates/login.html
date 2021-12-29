@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>-->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+
+
+<div style="padding-right: 15px;
+                              padding-left: 15px;
+                              margin-right: auto;
+                              margin-left: auto;">
+<!--    <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>-->
+    <form th:action="@{/login}" method="POST">
+        <h3><span th:text="${@environment.getProperty('spring.application.name')}"></span></h3>
+        <br/>
+
+        <input type="text" id="user_name" name="user_name" placeholder="User Name" style="color: #999;"/> <br/>
+        <input type="password" th:placeholder="Password" id="password" name="password" style="color: #999;"/> <br/>
+
+        <div align="left" th:if="${param.error}">
+            <p style="font-size: 20; color: #ff1c19;">Пользователь или пароль неправильный.</p>
+        </div>
+        <button style="display: block; width: 150px" name="Submit" value="Login" type="Submit" th:text="Войти"></button>
+    </form>
+    <form th:action="@{/registration}" method="get">
+        <button style="display: block; width: 150px" type="Submit">Регистрация</button>
+    </form>
+</div>
+</body>
+</html>
